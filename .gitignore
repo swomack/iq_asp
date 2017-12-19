@@ -1,0 +1,6 @@
+packages/
+SampleASP.Tests/bin/
+SampleASP/bin/
+SampleASP.Tests/obj/
+SampleASP/obj/
+.vs/
