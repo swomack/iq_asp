@@ -13,8 +13,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>iQ3</RootNamespace>
-    <AssemblyName>iQ3</AssemblyName>
+    <RootNamespace>SampleASP</RootNamespace>
+    <AssemblyName>SampleASP</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -152,8 +152,28 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Crypto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\Extended\User.cs" />
+    <Compile Include="Models\DB\SampleASP.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SampleASP.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\SampleASP.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SampleASP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\SampleASP.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SampleASP.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\User.cs">
+      <DependentUpon>SampleASP.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -164,10 +184,27 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\DB\SampleASP.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SampleASP.edmx</DependentUpon>
+      <LastGenOutput>SampleASP.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DB\SampleASP.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SampleASP.edmx</DependentUpon>
+      <LastGenOutput>SampleASP.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EntityDeploy Include="Models\DB\SampleASP.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SampleASP.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DB\SampleASP.edmx.diagram">
+      <DependentUpon>SampleASP.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -196,13 +233,12 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\User\Registration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\DB\Extended\" />
     <Folder Include="Models\EntityManager\" />
     <Folder Include="Models\ViewModels\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

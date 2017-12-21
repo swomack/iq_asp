@@ -99,7 +99,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\iQ3\SampleASP.csproj">
+    <ProjectReference Include="..\SampleASP\SampleASP.csproj">
       <Project>{64D63719-0266-437A-8E0D-1A29A4DA6919}</Project>
       <Name>SampleASP</Name>
     </ProjectReference>
