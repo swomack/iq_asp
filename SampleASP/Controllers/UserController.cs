@@ -74,6 +74,35 @@ namespace SampleASP.Controllers
             return View(user);
         }
 
+
+        [HttpGet]
+        public ActionResult VerifyAccount(string id)
+        {
+            bool Status = false;
+            string Message = "";
+
+            using (SampleASPEntities db = new SampleASPEntities())
+            {
+                var v = db.Users.Where(a => a.Token == new Guid(id)).FirstOrDefault();
+
+                if (v != null)
+                {
+                    Status = true;
+                    v.IsVerified = true;
+                    db.SaveChanges();
+                }
+                else
+                {
+                    Message = "Invalid activation code!";
+                }
+            }
+
+            ViewBag.Status = Status;
+            ViewBag.Message = Message;
+
+            return View();
+        }
+
         [NonAction]
         private bool IsUserNameExist(string Username)
         {
@@ -92,7 +121,7 @@ namespace SampleASP.Controllers
         private void SendEmailVerificationCode(string emailId, Guid token)
         {
 
-            var verifyUrl = "User/verifyAccount/" + token;
+            var verifyUrl = "/User/VerifyAccount/" + token;
             var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyUrl);
 
             var fromEmail = new MailAddress("SampleASP1234@gmail.com", "SampleASP");
@@ -101,7 +130,10 @@ namespace SampleASP.Controllers
 
             var subject = "Account verification";
 
-            var body = "<a hreaf = '" + link + "'>" + link + "</a>";
+            var body = "<div>" +
+                "To verify this email please go to the following link - " +
+                "<a href = '" + link + "'>" + link + "</a>" +
+                "</div>";
 
 
             var smtp = new SmtpClient
