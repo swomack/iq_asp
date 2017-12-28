@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using SampleASP.Models.DB;
 using System.Net;
 using System.Net.Mail;
+using SampleASP.Models.ViewModels;
+using System.Web.Security;
 
 namespace SampleASP.Controllers
 {
@@ -31,7 +33,11 @@ namespace SampleASP.Controllers
                     ModelState.AddModelError("UsernameExists", "You can not use this username, its already taken!");
                 }
                 else
-                {
+                { 
+                    #region Generate Userid
+                    user.Userid = Guid.NewGuid();
+                    #endregion
+
                     #region Generate Token
                     user.Token = Guid.NewGuid();
                     #endregion
@@ -101,6 +107,61 @@ namespace SampleASP.Controllers
             ViewBag.Message = Message;
 
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(UserLogin userLogin, string ReturnUrl)
+        {
+            var message = "";
+
+            using (SampleASPEntities db = new SampleASPEntities())
+            {
+                var record = db.Users.Where(a => a.Username == userLogin.Username).FirstOrDefault();
+
+                if (record != null && String.Equals(Crypto.Hash(userLogin.Password), record.Password))
+                {
+                    var timeout = userLogin.RememberMe ? 525600 : 20;
+                    var ticket = new FormsAuthenticationTicket(userLogin.Username, userLogin.RememberMe, timeout);
+                    var encrypted = FormsAuthentication.Encrypt(ticket);
+                    var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted);
+                    cookie.Expires = DateTime.Now.AddMinutes(timeout);
+                    cookie.HttpOnly = true;
+                    Response.Cookies.Add(cookie);
+
+                    if (Url.IsLocalUrl(ReturnUrl))
+                    {
+                        return Redirect(ReturnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+
+                }
+                else
+                {
+                    message = "Invalid Username or Password!";
+                }
+
+            }
+
+            ViewBag.Message = message;
+
+            return View();
+        }
+
+        [Authorize]
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login", "User");
         }
 
         [NonAction]

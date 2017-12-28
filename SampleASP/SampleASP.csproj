@@ -175,6 +175,7 @@
     <Compile Include="Models\DB\User.cs">
       <DependentUpon>SampleASP.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModels\UserLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -184,6 +185,22 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="ModelCacheGenerator\assimp-vc140-mt.dll" />
+    <Content Include="ModelCacheGenerator\boost_filesystem-vc140-mt-1_62.dll" />
+    <Content Include="ModelCacheGenerator\boost_program_options-vc140-mt-1_62.dll" />
+    <Content Include="ModelCacheGenerator\boost_regex-vc140-mt-1_62.dll" />
+    <Content Include="ModelCacheGenerator\boost_system-vc140-mt-1_62.dll" />
+    <Content Include="ModelCacheGenerator\DotProduct_x64.dll" />
+    <Content Include="ModelCacheGenerator\GenerateCache.exe" />
+    <Content Include="ModelCacheGenerator\iq3_model_server.exe" />
+    <Content Include="ModelCacheGenerator\laszip.dll" />
+    <Content Include="ModelCacheGenerator\Meeting.dll" />
+    <Content Include="ModelCacheGenerator\ModelCacheGenerator.dll" />
+    <Content Include="ModelCacheGenerator\msvcp120.dll" />
+    <Content Include="ModelCacheGenerator\msvcr120.dll" />
+    <Content Include="ModelCacheGenerator\PotreeConverter.dll" />
+    <Content Include="ModelCacheGenerator\Server.dll" />
+    <Content Include="ModelCacheGenerator\zlib1.dll" />
     <Content Include="Models\DB\SampleASP.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SampleASP.edmx</DependentUpon>
@@ -230,16 +247,15 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\User\Registration.cshtml" />
     <Content Include="Views\User\VerifyAccount.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\EntityManager\" />
-    <Folder Include="Models\ViewModels\" />
+    <Folder Include="UploadedFiles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

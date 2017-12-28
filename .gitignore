@@ -4,3 +4,4 @@ SampleASP/bin/
 SampleASP.Tests/obj/
 SampleASP/obj/
 .vs/
+SampleASP/ModelCacheGenerator/
